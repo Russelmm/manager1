@@ -12,11 +12,12 @@ class EmployeeEdit extends Component {
         _.each(this.props.employee, (value, prop) => {
             this.props.employeeUpdate({prop,value});
         });
+        console.log("222222222222222"+this.props.employee);
     }
 
     onButtonPress(){
         const{name, phone, shift} = this.props;
-        this.props.employeeSave({name, phone,shift,uid: this.props.employee.uid});
+        this.props.employeeSave({name, phone,shift,uid: this.props.employee.uid},this.props.date);
     }
 
     onTextPress() {
@@ -45,15 +46,11 @@ class EmployeeEdit extends Component {
                     </Button>
                 </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.onTextPress.bind(this)}>
-                        Text Schedule
-                    </Button>
-                </CardSection>
+
 
                 <CardSection>
                     <Button onPress={() => this.setState({showModal: !this.state.showModal})}>
-                        Fire Employee
+                        Delete task
                     </Button>
                 </CardSection>
 

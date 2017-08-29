@@ -6,9 +6,10 @@ import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component {
     onButtonPress(){
+        console.log("================="+this.props.date.uid);
         const {name, phone, shift} = this.props;
 
-        this.props.employeeCreate({name, phone, shift: shift || 'Monday'});
+        this.props.employeeCreate({name, phone, shift: shift || 'Sport'}, this.props.date);
     }
 
     render(){

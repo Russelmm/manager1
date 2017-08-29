@@ -10,8 +10,8 @@ class EmployeeForm extends Component {
             <View>
                 <CardSection>
                     <Input
-                        label="Name"
-                        placeholder="Jane"
+                        label="Task"
+                        placeholder="Your task"
                         value={this.props.name}
                         onChangeText={value => this.props.employeeUpdate({prop: 'name', value})}
                     />
@@ -19,8 +19,8 @@ class EmployeeForm extends Component {
 
                 <CardSection>
                     <Input
-                        label="Phone"
-                        placeholder="555-555"
+                        label="Info"
+                        placeholder="Description"
                         value={this.props.phone}
                         onChangeText={value => this.props.employeeUpdate({prop: 'phone', value})}
                     />
@@ -33,12 +33,8 @@ class EmployeeForm extends Component {
                         selectedValue={this.props.shift}
                         onValueChange={value => this.props.employeeUpdate({prop: 'shift', value})}
                     >
-                        <Picker.Item label="M" value="M"/>
-                        <Picker.Item label="T" value="T"/>
-                        <Picker.Item label="W" value="W"/>
-                        <Picker.Item label="TH" value="TH"/>
-                        <Picker.Item label="F" value="F"/>
-                        <Picker.Item label="S" value="S"/>
+                        <Picker.Item label="Sport" value="Sport"/>
+                        <Picker.Item label="Business" value="Business"/>
                     </Picker>
                 </CardSection>
             </View>

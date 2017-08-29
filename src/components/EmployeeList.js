@@ -1,13 +1,15 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ListView} from 'react-native';
+import {ListView, View} from 'react-native';
 import {employeesFetch} from '../actions';
 import ListItem from './ListItem';
+import { Card, CardSection, Button} from './common';
+import {Actions} from 'react-native-router-flux';
 
 class EmployeeList extends Component{
     componentWillMount(){
-        this.props.employeesFetch();
+        this.props.employeesFetch(this.props.date);
 
         this.createDataSource(this.props);
     }
@@ -24,19 +26,36 @@ class EmployeeList extends Component{
         this.dataSource = ds.cloneWithRows(employees);
     }
 
+    onButtonPress(){
+        Actions.employeeCreate({date: this.props.date})
+    }
+
     renderRow(employee) {
-        console.log('Employee name: ', employee.name);
+        console.log('Employee name: ', employee.phone);
         return <ListItem employee={employee} />;
     }
 
     render(){
-        console.log(this.props);
+
         return(
-            <ListView
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={this.renderRow}
-            />
+            <View>
+                <CardSection>
+                    <ListView
+                        enableEmptySections
+                        dataSource={this.dataSource}
+                        renderRow={this.renderRow}
+                    />
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onButtonPress.bind(this)}
+                    >
+                        Add Task
+                    </Button>
+                </CardSection>
+
+
+            </View>
+
         );
     }
 }

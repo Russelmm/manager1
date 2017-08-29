@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {CardSection} from './common/';
+import {employeesFetch} from '../actions';
+import {connect} from 'react-redux';
 
-class ListItem extends Component {
+class DateItem extends Component {
     onRowPress(){
-        Actions.employeeEdit({employee: this.props.employee}, {date:this.props.date});
+        //this.props.employeesFetch();
+        Actions.employeeList({date: this.props.date});
+        //this.props.employeeSave({name, phone,shift,uid: this.props.employee.uid});
     }
 
     render(){
-        const {name} = this.props.employee;
-        const {phone} = this.props.employee;
-        const {shift} = this.props.employee;
+        const {name} = this.props.date;
 
         return (
 
@@ -19,7 +21,7 @@ class ListItem extends Component {
                 <View>
                     <CardSection>
                         <Text style={styles.titleStyle}>
-                            {name} - {shift}
+                            {name}
                         </Text>
                     </CardSection>
 
@@ -36,4 +38,6 @@ const styles = {
     }
 };
 
-export default ListItem;
+//export default connect(null, { employeesFetch })(DateItem);
+
+export default DateItem;
