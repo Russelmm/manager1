@@ -1,18 +1,22 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ListView} from 'react-native';
+import {
+    StyleSheet,
+    ScrollView
+} from 'react-native';
 import {datesFetch} from '../actions';
 import DateItem from './DateItem';
+import index from "../reducers/index";
 
 class DateList extends Component{
     componentWillMount(){
         this.props.datesFetch();
 
-        this.createDataSource(this.props);
+        //this.createDataSource(this.props);
     }
 
-    componentWillReceiveProps(nextProps){
+    /*componentWillReceiveProps(nextProps){
         this.createDataSource(nextProps);
     }
 
@@ -27,17 +31,28 @@ class DateList extends Component{
     renderRow(date) {
         //console.log('Date name: ', date);
         return <DateItem date={date} />;
-    }
+    }*/
 
     render(){
 
-        return(
+        /*return(
             <ListView
                 //enableEmptySections
                 dataSource={this.dataSource}
                 renderRow={this.renderRow}
             />
-        );
+        );*/
+
+        const slides = this.props.dates.map((date, index) => {
+            return (
+                <DateItem key={index} date={date}/>
+            )
+        });
+        return (
+            <ScrollView horizontal={true} style={styles.withinDayHoursContainer}>
+                {slides}
+            </ScrollView>
+        )
     }
 }
 
@@ -48,5 +63,15 @@ const mapStateToProps = state => {
 
     return {dates};
 };
+
+let styles = StyleSheet.create({
+    wrapper: {
+    },
+    withinDayHoursContainer:{
+        marginTop:3,
+        borderTopColor:"rgba(255,255,255,0.7)",
+        borderBottomColor:"rgba(255,255,255,0.7)"
+    }
+});
 
 export default connect(mapStateToProps, {datesFetch}) (DateList);
