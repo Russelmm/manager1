@@ -7,7 +7,8 @@ import {
 const INITIAL_STATE = {
     name:'',
     phone: '',
-    shift: ''
+    shift: '',
+    dateUid: ''
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -50,9 +50,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const{name,phone,shift} = state.employeeForm;
+    const{name,phone,shift, dateUid} = state.employeeForm;
 
-    return{name,phone,shift}
+    return{name,phone,shift, dateUid}
 };
 
 export default connect(mapStateToProps, {employeeUpdate})(EmployeeForm);

@@ -25,12 +25,12 @@ class DateList extends Component{
     }
 
     renderRow(date) {
-        console.log('Date name: ', date);
+        //console.log('Date name: ', date);
         return <DateItem date={date} />;
     }
 
     render(){
-        console.log(this.props);
+
         return(
             <ListView
                 //enableEmptySections

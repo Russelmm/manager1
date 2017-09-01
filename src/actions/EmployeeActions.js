@@ -10,26 +10,6 @@ import {
     DATE_UPDATE
 } from './types';
 
-export const employeeUpdate = ({prop, value}) => {
-    return{
-        type: EMPLOYEE_UPDATE,
-        payload: {prop, value}
-    };
-};
-
-export const employeeCreate = ({name, phone, shift}, date) => {
-    const {currentUser} = firebase.auth();
-
-    return(dispatch) =>{
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/employees`)
-            .push({name, phone, shift})
-            .then(() => {
-            dispatch({type:EMPLOYEE_CREATE});
-            Actions.employeeList({type: 'reset'});
-            });
-    };
-};
-
 export const dateCreate = ({name}) => {
     const {currentUser} = firebase.auth();
 
@@ -62,6 +42,26 @@ export const datesFetch =() => {
     };
 };
 
+export const employeeUpdate = ({prop, value}) => {
+    return{
+        type: EMPLOYEE_UPDATE,
+        payload: {prop, value}
+    };
+};
+
+export const employeeCreate = ({name, phone, shift, dateUid}, date) => {
+    const {currentUser} = firebase.auth();
+
+    return(dispatch) =>{
+        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/employees`)
+            .push({name, phone, shift, dateUid})
+            .then(() => {
+                dispatch({type:EMPLOYEE_CREATE});
+                Actions.employeeList({type: 'reset'});
+            });
+    };
+};
+
 export const employeesFetch =(date) => {
     const {currentUser} = firebase.auth();
 
@@ -76,12 +76,12 @@ export const employeesFetch =(date) => {
     };
 };
 
-export const employeeSave = ({ name, phone, shift, uid },date) => {
+export const employeeSave = ({ name, phone, shift, dateUid, uid }) => {
     const { currentUser } = firebase.auth();
-
+    console.log(dateUid);
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/employees/${uid}`)
-            .set({ name, phone, shift })
+        firebase.database().ref(`/users/${currentUser.uid}/dates/${dateUid}/employees/${uid}`)
+            .set({ name, phone, shift, dateUid })
             .then(() => {
                 dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
                 Actions.employeeList({ type: 'reset' });
@@ -89,12 +89,12 @@ export const employeeSave = ({ name, phone, shift, uid },date) => {
     };
 };
 
-export const employeeDelete = ({ uid }) => {
+export const employeeDelete = ({ dateUid, uid }) => {
     const { currentUser } = firebase.auth();
 
     return () => {
         //firebase.database().ref(`/users/${currentUser.uid}/dates/employees/${uid}`)
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/employees/${uid}`)
+        firebase.database().ref(`/users/${currentUser.uid}/dates/${dateUid}/employees/${uid}`)
             .remove()
             .then(() => {
                 Actions.employeeList({ type: 'reset' });

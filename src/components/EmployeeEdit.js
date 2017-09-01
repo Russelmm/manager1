@@ -12,12 +12,11 @@ class EmployeeEdit extends Component {
         _.each(this.props.employee, (value, prop) => {
             this.props.employeeUpdate({prop,value});
         });
-        console.log("222222222222222"+this.props.employee);
     }
 
     onButtonPress(){
-        const{name, phone, shift} = this.props;
-        this.props.employeeSave({name, phone,shift,uid: this.props.employee.uid},this.props.date);
+        const{name, phone, shift, dateUid} = this.props;
+        this.props.employeeSave({name, phone,shift,dateUid, uid: this.props.employee.uid},this.props.date);
     }
 
     onTextPress() {
@@ -27,9 +26,10 @@ class EmployeeEdit extends Component {
     }
 
     onAccept() {
-        const { uid } = this.props.employee;
-        console.log('x');
-        this.props.employeeDelete({ uid });
+        const { dateUid, uid } = this.props.employee;
+        //console.log('x');
+        this.props.employeeDelete({ dateUid, uid });
+        this.setState({ showModal: false });
     }
 
     onDecline() {
@@ -67,9 +67,9 @@ class EmployeeEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const{name, phone, shift} = state.employeeForm;
+    const{name, phone, shift, dateUid} = state.employeeForm;
 
-    return {name, phone, shift};
+    return {name, phone, shift, dateUid};
 };
 
 export default connect(mapStateToProps, {
