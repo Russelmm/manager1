@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, Picker} from 'react-native';
 import {connect} from 'react-redux';
-import {employeeUpdate} from '../actions';
+import {taskUpdate} from '../actions';
 import {CardSection, Input} from './common';
 
-class EmployeeForm extends Component {
+class TaskForm extends Component {
     render(){
         return (
             <View>
@@ -13,7 +13,7 @@ class EmployeeForm extends Component {
                         label="Task"
                         placeholder="Your task"
                         value={this.props.name}
-                        onChangeText={value => this.props.employeeUpdate({prop: 'name', value})}
+                        onChangeText={value => this.props.taskUpdate({prop: 'name', value})}
                     />
                 </CardSection>
 
@@ -22,7 +22,7 @@ class EmployeeForm extends Component {
                         label="Info"
                         placeholder="Description"
                         value={this.props.phone}
-                        onChangeText={value => this.props.employeeUpdate({prop: 'phone', value})}
+                        onChangeText={value => this.props.taskUpdate({prop: 'phone', value})}
                     />
                 </CardSection>
 
@@ -31,7 +31,7 @@ class EmployeeForm extends Component {
                     <Picker
                         //style={{flex:1}}
                         selectedValue={this.props.shift}
-                        onValueChange={value => this.props.employeeUpdate({prop: 'shift', value})}
+                        onValueChange={value => this.props.taskUpdate({prop: 'shift', value})}
                     >
                         <Picker.Item label="Sport" value="Sport"/>
                         <Picker.Item label="Business" value="Business"/>
@@ -50,9 +50,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const{name,phone,shift, dateUid} = state.employeeForm;
+    const{name,phone,shift, dateUid} = state.taskForm;
 
     return{name,phone,shift, dateUid}
 };
 
-export default connect(mapStateToProps, {employeeUpdate})(EmployeeForm);
+export default connect(mapStateToProps, {taskUpdate})(TaskForm);
