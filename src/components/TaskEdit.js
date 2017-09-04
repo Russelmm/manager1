@@ -2,33 +2,27 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Communications from 'react-native-communications';
-import EmployeeForm from './EmployeeForm';
-import {employeeUpdate, employeeSave, employeeDelete} from "../actions";
+import TaskForm from './TaskForm';
+import {taskUpdate, taskSave, taskDelete} from "../actions";
 import { Card, CardSection, Button, Confirm} from './common';
 
-class EmployeeEdit extends Component {
+class TaskEdit extends Component {
     state = { showModal: false};
     componentWillMount(){
-        _.each(this.props.employee, (value, prop) => {
-            this.props.employeeUpdate({prop,value});
+        _.each(this.props.task, (value, prop) => {
+            this.props.taskUpdate({prop,value});
         });
     }
 
     onButtonPress(){
         const{name, phone, shift, dateUid} = this.props;
-        this.props.employeeSave({name, phone,shift,dateUid, uid: this.props.employee.uid},this.props.date);
-    }
-
-    onTextPress() {
-        const { phone, shift } = this.props;
-
-        Communications.text(phone, `Your upcoming shift is on ${shift}`);
+        this.props.taskSave({name, phone,shift,dateUid, uid: this.props.task.uid},this.props.date);
     }
 
     onAccept() {
-        const { dateUid, uid } = this.props.employee;
+        const { dateUid, uid } = this.props.task;
         //console.log('x');
-        this.props.employeeDelete({ dateUid, uid });
+        this.props.taskDelete({ dateUid, uid });
         this.setState({ showModal: false });
     }
 
@@ -39,7 +33,7 @@ class EmployeeEdit extends Component {
     render(){
         return(
             <Card>
-                <EmployeeForm/>
+                <TaskForm/>
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save Changes
@@ -67,11 +61,11 @@ class EmployeeEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const{name, phone, shift, dateUid} = state.employeeForm;
+    const{name, phone, shift, dateUid} = state.taskForm;
 
     return {name, phone, shift, dateUid};
 };
 
 export default connect(mapStateToProps, {
-    employeeUpdate, employeeSave, employeeDelete
-}) (EmployeeEdit);
+    taskUpdate, taskSave, taskDelete
+}) (TaskEdit);

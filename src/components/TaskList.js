@@ -2,14 +2,15 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ListView, View} from 'react-native';
-import {employeesFetch} from '../actions';
+import {tasksFetch} from '../actions';
 import ListItem from './ListItem';
 import { Card, CardSection, Button} from './common';
 import {Actions} from 'react-native-router-flux';
 
-class EmployeeList extends Component{
+class TaskList extends Component{
     componentWillMount(){
-        this.props.employeesFetch(this.props.date);
+
+        this.props.tasksFetch(this.props.date);
 
         this.createDataSource(this.props);
     }
@@ -18,21 +19,22 @@ class EmployeeList extends Component{
         this.createDataSource(nextProps);
     }
 
-    createDataSource({employees}){
+    createDataSource({tasks}){
 
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
-        this.dataSource = ds.cloneWithRows(employees);
+        this.dataSource = ds.cloneWithRows(tasks);
+        console.log('///////////////////////// '+ this.dataSource);
     }
 
     onButtonPress(){
-        Actions.employeeCreate({date: this.props.date})
+        Actions.taskCreate({date: this.props.date})
     }
 
-    renderRow(employee) {
-        return <ListItem employee={employee} />;
+    renderRow(task) {
+        return <ListItem task={task} />;
     }
 
     render(){
@@ -52,20 +54,17 @@ class EmployeeList extends Component{
                         Add Task
                     </Button>
                 </CardSection>
-
-
             </View>
-
         );
     }
 }
 
 const mapStateToProps = state => {
-    const employees = _.map(state.employees, (val, uid) => {
+    const tasks = _.map(state.tasks, (val, uid) => {
         return {...val, uid};
     });
 
-    return {employees};
+    return {tasks};
 };
 
-export default connect(mapStateToProps, {employeesFetch}) (EmployeeList);
+export default connect(mapStateToProps, {tasksFetch}) (TaskList);

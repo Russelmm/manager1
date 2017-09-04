@@ -5,14 +5,14 @@ import {CardSection} from './common/';
 
 class ListItem extends Component {
     onRowPress(){
-        Actions.employeeEdit({employee: this.props.employee});
-        console.log(this.props.employee);
+        Actions.taskEdit({task: this.props.task});
+        console.log(this.props.task);
     }
 
     render(){
-        const {name} = this.props.employee;
-        const {phone} = this.props.employee;
-        const {shift} = this.props.employee;
+        const {name} = this.props.task;
+        const {phone} = this.props.task;
+        const {shift} = this.props.task;
 
         return (
 

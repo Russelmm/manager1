@@ -8,6 +8,7 @@ import {
 import {datesFetch} from '../actions';
 import DateItem from './DateItem';
 import index from "../reducers/index";
+import {ListView, View, Text} from 'react-native';
 
 class DateList extends Component{
     componentWillMount(){
@@ -49,9 +50,9 @@ class DateList extends Component{
             )
         });
         return (
-            <ScrollView horizontal={true} style={styles.withinDayHoursContainer}>
-                {slides}
-            </ScrollView>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.withinDayHoursContainer}>
+                    {slides}
+                </ScrollView>
         )
     }
 }
@@ -71,7 +72,8 @@ let styles = StyleSheet.create({
         marginTop:3,
         borderTopColor:"rgba(255,255,255,0.7)",
         borderBottomColor:"rgba(255,255,255,0.7)"
-    }
+    },
+
 });
 
 export default connect(mapStateToProps, {datesFetch}) (DateList);

@@ -6,7 +6,7 @@ import {CardSection} from './common/';
 
 class DateItem extends Component {
     onRowPress(){
-        Actions.employeeList({date: this.props.date});
+        Actions.taskList({date: this.props.date});
     }
 
     render(){

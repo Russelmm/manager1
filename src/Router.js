@@ -1,9 +1,9 @@
 import React from 'react';
 import {Scene, Router, Actions} from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
-import EmployeeList from './components/EmployeeList';
-import EmployeeCreate from './components/EmployeeCreate';
-import EmployeeEdit from './components/EmployeeEdit';
+import TaskList from './components/TaskList';
+import TaskCreate from './components/TaskCreate';
+import TaskEdit from './components/TaskEdit';
 import DateList from './components/DateList';
 import DateCreate from './components/DateCreate';
 
@@ -23,17 +23,17 @@ const RouterComponent =() => {
                     initial
                 />
                 <Scene
-                    //onRight={() => Actions.employeeCreate()}
+                    //onRight={() => Actions.taskCreate()}
                     //rightTitle="Add"
                     onBack={() => Actions.dateList()}
-                    key="employeeList"
-                    component={EmployeeList}
+                    key="taskList"
+                    component={TaskList}
                     title="Tasks"
                     //initial
                 />
                 <Scene key="dateCreate" component={DateCreate} title="Create date"/>
-                <Scene key="employeeEdit" component={EmployeeEdit} title="Edit task"/>
-                <Scene key="employeeCreate" component={EmployeeCreate} title="Create task"/>
+                <Scene key="taskEdit" component={TaskEdit} title="Edit task"/>
+                <Scene key="taskCreate" component={TaskCreate} title="Create task"/>
 
 
 
