@@ -93,7 +93,6 @@ export const employeeDelete = ({ dateUid, uid }) => {
     const { currentUser } = firebase.auth();
 
     return () => {
-        //firebase.database().ref(`/users/${currentUser.uid}/dates/employees/${uid}`)
         firebase.database().ref(`/users/${currentUser.uid}/dates/${dateUid}/employees/${uid}`)
             .remove()
             .then(() => {
