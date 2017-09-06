@@ -6,7 +6,6 @@ import {CardSection} from './common/';
 class ListItem extends Component {
     onRowPress(){
         Actions.taskEdit({task: this.props.task});
-        console.log(this.props.task);
     }
 
     render(){
@@ -18,12 +17,9 @@ class ListItem extends Component {
 
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                 <View>
-                    <CardSection>
-                        <Text style={styles.titleStyle}>
-                            {name} - {shift}
-                        </Text>
-                    </CardSection>
-
+                    <Text style={styles.titleStyle}>
+                        {name} - {shift}
+                    </Text>
                 </View>
             </TouchableWithoutFeedback>
         );

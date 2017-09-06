@@ -30,7 +30,7 @@ export const dateUpdate = ({prop, value}) => {
     };
 };
 
-export const datesFetch =() => {
+export const datesFetch =(dateName) => {
     const {currentUser} = firebase.auth();
 
     return (dispatch) => {
@@ -49,15 +49,15 @@ export const taskUpdate = ({prop, value}) => {
     };
 };
 
-export const taskCreate = ({name, phone, shift, dateUid}, date) => {
+export const taskCreate = ({name, phone, shift, dateName}, date) => {
     const {currentUser} = firebase.auth();
 
     return(dispatch) =>{
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/tasks`)
-            .push({name, phone, shift, dateUid})
+        firebase.database().ref(`/users/${currentUser.uid}/tasks`)
+            .push({name, phone, shift, dateName})
             .then(() => {
                 dispatch({type:TASK_CREATE});
-                Actions.taskList({type: 'reset'});
+                Actions.dateList({date: date});
             });
     };
 };
@@ -65,39 +65,37 @@ export const taskCreate = ({name, phone, shift, dateUid}, date) => {
 export const tasksFetch =(date) => {
     const {currentUser} = firebase.auth();
 
+    let playersRef = firebase.database() .ref(`/users/${currentUser.uid}/tasks`);
+
     return (dispatch) => {
-
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${date.uid}/tasks`)
-            .on('value',snapshot =>{
-                dispatch({type: TASKS_FETCH_SUCCESS, payload: snapshot.val()});
-                Actions.taskList({date: date});
-
-            });
+        playersRef.orderByChild("dateName") .equalTo(date).on('value',snapshot =>{
+            dispatch({type: TASKS_FETCH_SUCCESS, payload: snapshot.val()});
+            //Actions.dateList({type: 'reset'});
+        });
     };
 };
 
-export const taskSave = ({ name, phone, shift, dateUid, uid }) => {
+export const taskSave = ({ name, phone, shift, dateName, uid }) => {
     const { currentUser } = firebase.auth();
-    console.log(dateUid);
+
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${dateUid}/tasks/${uid}`)
-            .set({ name, phone, shift, dateUid })
+        firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+            .set({ name, phone, shift, dateName })
             .then(() => {
                 dispatch({ type: TASK_SAVE_SUCCESS });
-                Actions.taskList({ type: 'reset' });
+                Actions.dateList({ date: dateName });
             });
     };
 };
 
-export const taskDelete = ({ dateUid, uid }) => {
+export const taskDelete = ({ uid, dateName }) => {
     const { currentUser } = firebase.auth();
 
     return () => {
-        //firebase.database().ref(`/users/${currentUser.uid}/dates/employees/${uid}`)
-        firebase.database().ref(`/users/${currentUser.uid}/dates/${dateUid}/tasks/${uid}`)
+        firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
             .remove()
             .then(() => {
-                Actions.taskList({ type: 'reset' });
+                Actions.dateList({ date: dateName });
             });
     };
 };

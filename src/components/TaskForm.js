@@ -50,9 +50,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const{name,phone,shift, dateUid} = state.taskForm;
+    const{name,phone,shift, dateName} = state.taskForm;
 
-    return{name,phone,shift, dateUid}
+    return{name,phone,shift, dateName}
 };
 
 export default connect(mapStateToProps, {taskUpdate})(TaskForm);

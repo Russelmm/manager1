@@ -15,14 +15,14 @@ class TaskEdit extends Component {
     }
 
     onButtonPress(){
-        const{name, phone, shift, dateUid} = this.props;
-        this.props.taskSave({name, phone,shift,dateUid, uid: this.props.task.uid},this.props.date);
+        const{name, phone, shift, dateName} = this.props;
+        this.props.taskSave({name, phone,shift,dateName, uid: this.props.task.uid});
     }
 
     onAccept() {
-        const { dateUid, uid } = this.props.task;
+        const { uid, dateName } = this.props.task;
         //console.log('x');
-        this.props.taskDelete({ dateUid, uid });
+        this.props.taskDelete({ uid, dateName });
         this.setState({ showModal: false });
     }
 
@@ -31,6 +31,7 @@ class TaskEdit extends Component {
     }
 
     render(){
+
         return(
             <Card>
                 <TaskForm/>
@@ -61,9 +62,9 @@ class TaskEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const{name, phone, shift, dateUid} = state.taskForm;
+    const{name, phone, shift, dateName} = state.taskForm;
 
-    return {name, phone, shift, dateUid};
+    return {name, phone, shift, dateName};
 };
 
 export default connect(mapStateToProps, {

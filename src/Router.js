@@ -15,16 +15,12 @@ const RouterComponent =() => {
             </Scene>
             <Scene key="main" >
                 <Scene
-                    onRight={() => Actions.dateCreate()}
-                    rightTitle="Add"
                     key="dateList"
                     component={DateList}
                     title="Date"
                     initial
                 />
                 <Scene
-                    //onRight={() => Actions.taskCreate()}
-                    //rightTitle="Add"
                     onBack={() => Actions.dateList()}
                     key="taskList"
                     component={TaskList}

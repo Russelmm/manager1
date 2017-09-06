@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     name:'',
     phone: '',
     shift: '',
-    dateUid: ''
+    dateName: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
