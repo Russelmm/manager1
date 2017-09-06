@@ -9,7 +9,7 @@ class TaskCreate extends Component {
 
         const {name, phone, shift, dateName} = this.props;
 
-        this.props.taskCreate({name, phone, shift: shift || 'Sport', dateName: this.props.date.dateString}, this.props.date);
+        this.props.taskCreate({name, phone, shift: shift || 'Sport', dateName: this.props.date}, this.props.date);
     }
 
     render(){
@@ -25,7 +25,6 @@ class TaskCreate extends Component {
         );
     }
 }
-
 
 const mapStateToProps = (state) => {
     const {name, phone, shift, dateName} = state.taskForm;

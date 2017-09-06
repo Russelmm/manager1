@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import  TaskList  from './TaskList';
 import moment from "moment";
@@ -13,7 +13,9 @@ class DateList extends Component{
         let today = new Date();
         let dateString = moment(today).format('YYYY-MM-DD');
         let currentDate = this.props.date === undefined ? dateString : this.props.date;
-        this.state = { date: currentDate };
+        this.state = {
+            date: currentDate
+        };
     }
 
     componentDidMount(){
@@ -27,24 +29,28 @@ class DateList extends Component{
     }
 
     render(){
-        console.log(this.props);
+
         return (
             <ScrollView>
-
-                    <Agenda
-                        selected={this.state.date}
-                        minDate={'2012-05-10'}
-                        maxDate={'2020-05-30'}
-                        onDayPress={(day) => {this.onDatePress(day)}}
-
-                    />
-                <TaskList date={this.state.date} />
+                <Agenda
+                    selected={this.state.date}
+                    minDate={'2012-05-10'}
+                    maxDate={'2020-05-30'}
+                    onDayPress={(day) => {this.onDatePress(day)}}
+                />
+                <View style={styles.taskListStyle}>
+                   <TaskList date={this.state.date} />
+                </View>
             </ScrollView>
         )
     }
 }
 
-
+const styles = {
+    taskListStyle: {
+        marginTop: -97
+    },
+};
 
 export default connect(null, {tasksFetch}) (DateList);
 
