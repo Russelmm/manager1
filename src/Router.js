@@ -27,7 +27,6 @@ const RouterComponent =() => {
                     key="taskList"
                     component={TaskList}
                     title="Tasks"
-
                 />
                 <Scene key="dateCreate" component={DateCreate} title="Create date"/>
                 <Scene key="taskEdit" component={TaskEdit} title="Edit task"/>

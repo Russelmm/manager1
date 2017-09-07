@@ -58,7 +58,7 @@ class TaskList extends Component{
                         <View >
                             <Text style={styles.titleStyle}>Hard tasks</Text>
                         </View>
-                </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback>
                     <RoundButton onPress={this.onButtonPress.bind(this)}> Add </RoundButton>
                 </CardSection>
                 <View style={this.state.styles} >
