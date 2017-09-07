@@ -6,6 +6,7 @@ import TaskCreate from './components/TaskCreate';
 import TaskEdit from './components/TaskEdit';
 import DateList from './components/DateList';
 import DateCreate from './components/DateCreate';
+import MainCalendar from "./components/Calendar";
 
 const RouterComponent =() => {
     return (
@@ -14,6 +15,7 @@ const RouterComponent =() => {
                 <Scene key="login" component={LoginForm} title="Login" />
             </Scene>
             <Scene key="main" >
+                <Scene component={MainCalendar} key="calendar"/>
                 <Scene
                     key="dateList"
                     component={DateList}
@@ -25,14 +27,11 @@ const RouterComponent =() => {
                     key="taskList"
                     component={TaskList}
                     title="Tasks"
-                    //initial
+
                 />
                 <Scene key="dateCreate" component={DateCreate} title="Create date"/>
                 <Scene key="taskEdit" component={TaskEdit} title="Edit task"/>
                 <Scene key="taskCreate" component={TaskCreate} title="Create task"/>
-
-
-
             </Scene>
         </Router>
     );

@@ -5,6 +5,8 @@ import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import ListItem from './ListItem';
 import { CardSection, RoundButton} from './common';
 import {Actions} from 'react-native-router-flux';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 import index from "../reducers/index";
 
 class TaskList extends Component{
@@ -12,14 +14,14 @@ class TaskList extends Component{
     constructor(props) {
         super(props);
         const styles = {
-            display: 'none'
+            display: 'flex'
         };
         this.state = { styles: styles };
     }
 
     componentWillReceiveProps(){
         const styles2 = {
-            display: 'none'
+            display: 'flex'
         };
         this.setState({styles: styles2})
     }
@@ -30,12 +32,12 @@ class TaskList extends Component{
 
     onRowPress(){
         const styles = {
-            display: 'flex'
-        };
-        const styles2 = {
             display: 'none'
         };
-        this.state.styles.display === 'none' ? this.setState({styles: styles}) : this.setState({styles: styles2})
+        const styles2 = {
+            display: 'flex'
+        };
+        this.state.styles.display === 'flex' ? this.setState({styles: styles}) : this.setState({styles: styles2})
 
     }
 
@@ -61,7 +63,7 @@ class TaskList extends Component{
                 </CardSection>
                 <View style={this.state.styles} >
                     {tasks}
-                </View >
+                </View>
             </View>
 
         );
@@ -84,6 +86,11 @@ const styles = {
         color: '#007aff',
         paddingTop: 8,
         paddingBottom: 8
+    },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: 'white',
     }
 };
 

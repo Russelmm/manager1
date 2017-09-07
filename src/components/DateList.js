@@ -5,6 +5,8 @@ import  TaskList  from './TaskList';
 import moment from "moment";
 import {tasksFetch} from '../actions';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+import {Button} from "./common/Button";
 
 class DateList extends Component{
 
@@ -28,6 +30,10 @@ class DateList extends Component{
 
     }
 
+    onButtonPress(){
+        Actions.calendar({date: this.state.date})
+    }
+
     render(){
 
         return (
@@ -37,8 +43,10 @@ class DateList extends Component{
                     minDate={'2012-05-10'}
                     maxDate={'2020-05-30'}
                     onDayPress={(day) => {this.onDatePress(day)}}
+                    hideKnob={true}
                 />
                 <View style={styles.taskListStyle}>
+                    <Button onPress={this.onButtonPress.bind(this)}/>
                    <TaskList date={this.state.date} />
                 </View>
             </ScrollView>
