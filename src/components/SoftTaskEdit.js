@@ -1,27 +1,26 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Communications from 'react-native-communications';
 import TaskForm from './TaskForm';
-import {taskUpdate, taskSave, taskDelete} from "../actions";
+import {softTaskUpdate, softTaskSave, softTaskDelete} from "../actions";
 import { Card, CardSection, Button, Confirm} from './common';
 
-class TaskEdit extends Component {
+class SoftTaskEdit extends Component {
     state = { showModal: false};
     componentWillMount(){
         _.each(this.props.task, (value, prop) => {
-            this.props.taskUpdate({prop,value});
+            this.props.softTaskUpdate({prop,value});
         });
     }
 
     onButtonPress(){
         const{name, phone, shift, dateName} = this.props;
-        this.props.taskSave({name, phone,shift,dateName, uid: this.props.task.uid});
+        this.props.softTaskSave({name, phone,shift,dateName, uid: this.props.task.uid});
     }
 
     onAccept() {
         const { uid, dateName } = this.props.task;
-        this.props.taskDelete({ uid, dateName });
+        this.props.softTaskDelete({ uid, dateName });
         this.setState({ showModal: false });
     }
 
@@ -61,11 +60,11 @@ class TaskEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const{name, phone, shift, dateName} = state.taskForm;
+    const{name, phone, shift, dateName} = state.softTaskForm;
 
     return {name, phone, shift, dateName};
 };
 
 export default connect(mapStateToProps, {
-    taskUpdate, taskSave, taskDelete
-}) (TaskEdit);
+    softTaskUpdate, softTaskSave, softTaskDelete
+}) (SoftTaskEdit);

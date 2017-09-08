@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import  TaskList  from './TaskList';
+import SoftTaskList from './SoftTaskList';
 import moment from "moment";
-import {tasksFetch} from '../actions';
+import {tasksFetch, softTaskFetch} from '../actions';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
-import {Button} from "./common/Button";
 
 class DateList extends Component{
 
@@ -22,10 +22,12 @@ class DateList extends Component{
 
     componentDidMount(){
         this.props.tasksFetch(this.state.date);
+        this.props.softTaskFetch(this.state.date);
     }
 
     onDatePress(day){
         this.props.tasksFetch(day.dateString);
+        this.props.softTaskFetch(day.dateString);
         this.setState({date: day.dateString});
 
     }
@@ -35,9 +37,42 @@ class DateList extends Component{
     }
 
     render(){
-
+        let today = this.state.date;
+        let todayArr = today.split('-');
+        let mounth = '';
+        switch (todayArr[1]) {
+            case '01': mounth = 'January';
+                break;
+            case '02': mounth = 'February';
+                break;
+            case '03': mounth = 'March';
+                break;
+            case '04': mounth = 'April';
+                break;
+            case '05': mounth = 'May';
+                break;
+            case '06': mounth = 'June';
+                break;
+            case '07': mounth = 'Jule';
+                break;
+            case '08': mounth = 'August';
+                break;
+            case '09': mounth = 'September';
+                break;
+            case '10': mounth = 'October';
+                break;
+            case '11': mounth = 'November';
+                break;
+            case '12': mounth = 'December';
+                break;
+        }
         return (
             <ScrollView>
+                <TouchableWithoutFeedback onPress={this.onButtonPress.bind(this)}>
+                    <View >
+                        <Text style={styles.titleStyle}>{mounth}</Text>
+                    </View>
+                </TouchableWithoutFeedback>
                 <Agenda
                     selected={this.state.date}
                     minDate={'2012-05-10'}
@@ -46,8 +81,8 @@ class DateList extends Component{
                     hideKnob={true}
                 />
                 <View style={styles.taskListStyle}>
-                    <Button onPress={this.onButtonPress.bind(this)}/>
                    <TaskList date={this.state.date} />
+                    <SoftTaskList date={this.state.date} />
                 </View>
             </ScrollView>
         )
@@ -56,11 +91,18 @@ class DateList extends Component{
 
 const styles = {
     taskListStyle: {
-        marginTop: -97
+        marginTop: -98
+    },
+    titleStyle: {
+        fontSize:18,
+        paddingLeft: 15,
+        color: '#777',
+        paddingTop: 8,
+        paddingBottom: 8
     },
 };
 
-export default connect(null, {tasksFetch}) (DateList);
+export default connect(null, {tasksFetch, softTaskFetch}) (DateList);
 
 
 

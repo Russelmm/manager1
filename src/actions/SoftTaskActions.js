@@ -1,63 +1,63 @@
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import {
-    TASK_UPDATE,
-    TASK_CREATE,
-    TASKS_FETCH_SUCCESS,
-    TASK_SAVE_SUCCESS
+    SOFTTASK_UPDATE,
+    SOFTTASK_CREATE,
+    SOFTTASKS_FETCH_SUCCESS,
+    SOFTTASK_SAVE_SUCCESS
 } from './types';
 
-export const taskUpdate = ({prop, value}) => {
+export const softTaskUpdate = ({prop, value}) => {
     return{
-        type: TASK_UPDATE,
+        type: SOFTTASK_UPDATE,
         payload: {prop, value}
     };
 };
 
-export const taskCreate = ({name, phone, shift, dateName}, date) => {
+export const softTaskCreate = ({name, phone, shift, dateName}, date) => {
     const {currentUser} = firebase.auth();
 
     return(dispatch) =>{
-        firebase.database().ref(`/users/${currentUser.uid}/tasks`)
+        firebase.database().ref(`/users/${currentUser.uid}/softtasks`)
             .push({name, phone, shift, dateName})
             .then(() => {
-                dispatch({type:TASK_CREATE});
+                dispatch({type:SOFTTASK_CREATE});
                 Actions.dateList({date: date});
             });
     };
 };
 
-export const tasksFetch =(date) => {
+export const softTaskFetch =(date) => {
     const {currentUser} = firebase.auth();
 
-    let playersRef = firebase.database() .ref(`/users/${currentUser.uid}/tasks`);
+    let playersRef = firebase.database() .ref(`/users/${currentUser.uid}/softtasks`);
 
     return (dispatch) => {
         playersRef.orderByChild("dateName") .equalTo(date).on('value',snapshot =>{
-            dispatch({type: TASKS_FETCH_SUCCESS, payload: snapshot.val()});
+            dispatch({type: SOFTTASKS_FETCH_SUCCESS, payload: snapshot.val()});
             //Actions.dateList({type: 'reset'});
         });
     };
 };
 
-export const taskSave = ({ name, phone, shift, dateName, uid }) => {
+export const softTaskSave = ({ name, phone, shift, dateName, uid }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+        firebase.database().ref(`/users/${currentUser.uid}/softtasks/${uid}`)
             .set({ name, phone, shift, dateName })
             .then(() => {
-                dispatch({ type: TASK_SAVE_SUCCESS });
+                dispatch({ type: SOFTTASK_SAVE_SUCCESS });
                 Actions.dateList({ date: dateName });
             });
     };
 };
 
-export const taskDelete = ({ uid, dateName }) => {
+export const softTaskDelete = ({ uid, dateName }) => {
     const { currentUser } = firebase.auth();
 
     return () => {
-        firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+        firebase.database().ref(`/users/${currentUser.uid}/softtasks/${uid}`)
             .remove()
             .then(() => {
                 Actions.dateList({ date: dateName });
