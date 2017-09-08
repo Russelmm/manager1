@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { ScrollView, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import  TaskList  from './TaskList';
+import SoftTaskList from './SoftTaskList';
 import moment from "moment";
-import {tasksFetch} from '../actions';
+import {tasksFetch, softTaskFetch} from '../actions';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
-import {Button} from "./common/Button";
 
 class DateList extends Component{
 
@@ -22,10 +22,12 @@ class DateList extends Component{
 
     componentDidMount(){
         this.props.tasksFetch(this.state.date);
+        this.props.softTaskFetch(this.state.date);
     }
 
     onDatePress(day){
         this.props.tasksFetch(day.dateString);
+        this.props.softTaskFetch(day.dateString);
         this.setState({date: day.dateString});
 
     }
@@ -80,6 +82,7 @@ class DateList extends Component{
                 />
                 <View style={styles.taskListStyle}>
                    <TaskList date={this.state.date} />
+                    <SoftTaskList date={this.state.date} />
                 </View>
             </ScrollView>
         )
@@ -99,7 +102,7 @@ const styles = {
     },
 };
 
-export default connect(null, {tasksFetch}) (DateList);
+export default connect(null, {tasksFetch, softTaskFetch}) (DateList);
 
 
 

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-class ListItem extends Component {
+class SoftTaskListItem extends Component {
     onRowPress(){
-        Actions.taskEdit({task: this.props.task});
+        Actions.softTaskEdit({task: this.props.task});
     }
 
     render(){
@@ -32,4 +32,4 @@ const styles = {
     }
 };
 
-export default ListItem;
+export default SoftTaskListItem;

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { Calendar } from 'react-native-calendars';
+import { Calendar, CalendarList } from 'react-native-calendars';
 import moment from "moment";
 import {Actions} from 'react-native-router-flux';
-import { DatePickerAndroid } from 'react-native';
+
 
 class MainCalendar extends Component {
 
