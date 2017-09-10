@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
 
-const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
+const Input = ({label, value, onChangeText, placeholder, secureTextEntry, numberOfLines}) => {
     const { inputStyle, labelStyle, containerStyle } = styles;
 
     return (
@@ -15,7 +15,7 @@ const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
                 onChangeText={onChangeText}
                 underlineColorAndroid='transparent'
                 multiline = {true}
-                numberOfLines = {2}
+                numberOfLines = {numberOfLines}
             />
         </View>
     );

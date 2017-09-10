@@ -1,26 +1,26 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import SoftTaskForm from './SoftTaskForm';
-import {softTaskUpdate, softTaskSave, softTaskDelete} from "../actions";
+import MindForm from './MindForm';
+import {mindUpdate, mindSave, mindDelete} from "../actions";
 import { Card, CardSection, Button, Confirm} from './common';
 
-class SoftTaskEdit extends Component {
+class MindEdit extends Component {
     state = { showModal: false};
     componentWillMount(){
-        _.each(this.props.task, (value, prop) => {
-            this.props.softTaskUpdate({prop,value});
+        _.each(this.props.mind, (value, prop) => {
+            this.props.mindUpdate({prop,value});
         });
     }
 
     onButtonPress(){
-        const{name, phone, shift, dateName} = this.props;
-        this.props.softTaskSave({name, phone,shift,dateName, uid: this.props.task.uid});
+        const{description, dateName} = this.props;
+        this.props.mindSave({description,dateName, uid: this.props.mind.uid});
     }
 
     onAccept() {
-        const { uid, dateName } = this.props.task;
-        this.props.softTaskDelete({ uid, dateName });
+        const { uid, dateName } = this.props.mind;
+        this.props.mindDelete({ uid, dateName });
         this.setState({ showModal: false });
     }
 
@@ -32,7 +32,7 @@ class SoftTaskEdit extends Component {
 
         return(
             <Card>
-                <SoftTaskForm/>
+                <MindForm/>
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save Changes
@@ -43,7 +43,7 @@ class SoftTaskEdit extends Component {
 
                 <CardSection>
                     <Button onPress={() => this.setState({showModal: !this.state.showModal})}>
-                        Delete task
+                        Delete
                     </Button>
                 </CardSection>
 
@@ -60,11 +60,11 @@ class SoftTaskEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const{name, phone, shift, dateName} = state.softTaskForm;
+    const{description, dateName} = state.mindForm;
 
-    return {name, phone, shift, dateName};
+    return {description, dateName};
 };
 
 export default connect(mapStateToProps, {
-    softTaskUpdate, softTaskSave, softTaskDelete
-}) (SoftTaskEdit);
+    mindUpdate, mindSave, mindDelete
+}) (MindEdit);

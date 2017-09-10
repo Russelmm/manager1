@@ -40,6 +40,7 @@ class LoginForm extends Component {
                         placeholder="email@test.com"
                         onChangeText={this.onEmailChange.bind(this)}
                         value={this.props.email}
+                        numberOfLines={2}
                     />
                 </CardSection>
 
@@ -50,6 +51,7 @@ class LoginForm extends Component {
                         placeholder="password"
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}
+                        numberOfLines={2}
                     />
                 </CardSection>
 

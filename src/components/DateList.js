@@ -4,9 +4,10 @@ import { Agenda } from 'react-native-calendars';
 import  TaskList  from './TaskList';
 import SoftTaskList from './SoftTaskList';
 import moment from "moment";
-import {tasksFetch, softTaskFetch} from '../actions';
+import {tasksFetch, softTaskFetch, mindsFetch} from '../actions';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
+import MindList from "./MindList";
 
 class DateList extends Component{
 
@@ -23,11 +24,13 @@ class DateList extends Component{
     componentDidMount(){
         this.props.tasksFetch(this.state.date);
         this.props.softTaskFetch(this.state.date);
+        this.props.mindsFetch(this.state.date);
     }
 
     onDatePress(day){
         this.props.tasksFetch(day.dateString);
         this.props.softTaskFetch(day.dateString);
+        this.props.mindsFetch(day.dateString);
         this.setState({date: day.dateString});
 
     }
@@ -81,8 +84,9 @@ class DateList extends Component{
                     hideKnob={true}
                 />
                 <View style={styles.taskListStyle}>
-                   <TaskList date={this.state.date} />
+                    <TaskList date={this.state.date} />
                     <SoftTaskList date={this.state.date} />
+                    <MindList date={this.state.date}/>
                 </View>
             </ScrollView>
         )
@@ -102,7 +106,7 @@ const styles = {
     },
 };
 
-export default connect(null, {tasksFetch, softTaskFetch}) (DateList);
+export default connect(null, {tasksFetch, softTaskFetch, mindsFetch}) (DateList);
 
 
 

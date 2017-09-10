@@ -7,6 +7,8 @@ import DateList from './components/DateList';
 import SoftTaskCreate from './components/SoftTaskCreate';
 import SoftTaskEdit from './components/SoftTaskEdit';
 import MainCalendar from "./components/Calendar";
+import MindEdit from './components/MindEdit';
+import MindCreate from './components/MindCreate';
 
 const RouterComponent =() => {
     return (
@@ -25,16 +27,12 @@ const RouterComponent =() => {
                        key="calendar"
                        direction="vertical"
                        title="Calendar"/>
-                {/*<Scene
-                    onBack={() => Actions.dateList()}
-                    key="taskList"
-                    component={TaskList}
-                    title="Tasks"
-                />*/}
                 <Scene key="taskEdit" component={TaskEdit} title="Edit task"/>
                 <Scene key="taskCreate" component={TaskCreate} title="Create task" />
                 <Scene key="softTaskEdit" component={SoftTaskEdit} title="Edit task"/>
                 <Scene key="softTaskCreate" component={SoftTaskCreate} title="Create task" />
+                <Scene key="mindEdit" component={MindEdit} title="Edit thought"/>
+                <Scene key="mindCreate" component={MindCreate} title="Create thought" />
             </Scene>
         </Router>
     );

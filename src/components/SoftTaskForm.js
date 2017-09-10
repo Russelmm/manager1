@@ -14,6 +14,7 @@ class SoftTaskForm extends Component {
                         placeholder="Your task"
                         value={this.props.name}
                         onChangeText={value => this.props.softTaskUpdate({prop: 'name', value})}
+                        numberOfLines={2}
                     />
                 </CardSection>
 
@@ -23,6 +24,7 @@ class SoftTaskForm extends Component {
                         placeholder="Description"
                         value={this.props.phone}
                         onChangeText={value => this.props.softTaskUpdate({prop: 'phone', value})}
+                        numberOfLines={2}
                     />
                 </CardSection>
 

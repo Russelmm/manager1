@@ -2,48 +2,47 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
-import SoftTaskListItem from './SoftTaskListItem';
-import { CardSection, RoundButton } from './common';
+import MindListItem from './MindListItem';
+import { CardSection, RoundButton} from './common';
 import {Actions} from 'react-native-router-flux';
 
-class SoftTaskList extends Component{
+class MindList extends Component{
 
     constructor(props) {
         super(props);
         const styles = {
-            display: 'flex'
+            display: 'none'
         };
         this.state = { styles: styles };
     }
 
     componentWillReceiveProps(){
         const styles2 = {
-            display: 'flex'
-    };
+            display: 'none'
+        };
         this.setState({styles: styles2})
     }
 
     onButtonPress(){
-        Actions.softTaskCreate({date: this.props.date})
+        Actions.mindCreate({date: this.props.date})
     }
 
     onRowPress(){
         const styles = {
-            display: 'none'
-        };
-        const styles2 = {
             display: 'flex'
         };
-        this.state.styles.display === 'flex' ? this.setState({styles: styles}) : this.setState({styles: styles2})
+        const styles2 = {
+            display: 'none'
+        };
+        this.state.styles.display === 'none' ? this.setState({styles: styles}) : this.setState({styles: styles2})
 
     }
 
     render(){
-
-        let tasks = this.props.softTasks.map((task, index) => {
+        let minds = this.props.minds.map((mind, index) => {
             return (
                 <CardSection key={index} >
-                    <SoftTaskListItem  task={task} />
+                    <MindListItem  mind={mind} />
                 </CardSection>
 
             )
@@ -53,13 +52,13 @@ class SoftTaskList extends Component{
                 <CardSection>
                     <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                         <View >
-                            <Text style={styles.titleStyle}>Soft tasks</Text>
+                            <Text style={styles.titleStyle}>Thoughts</Text>
                         </View>
                     </TouchableWithoutFeedback>
                     <RoundButton onPress={this.onButtonPress.bind(this)}> Add </RoundButton>
                 </CardSection>
-                <View style={this.state.styles}>
-                    {tasks}
+                <View style={this.state.styles} >
+                    {minds}
                 </View>
             </View>
 
@@ -68,11 +67,11 @@ class SoftTaskList extends Component{
 }
 
 const mapStateToProps = state => {
-    const softTasks = _.map(state.softTasks, (val, uid) => {
+    const minds = _.map(state.minds, (val, uid) => {
         return {...val, uid};
     });
 
-    return {softTasks};
+    return {minds};
 };
 
 const styles = {
@@ -91,4 +90,4 @@ const styles = {
     }
 };
 
-export default connect(mapStateToProps)(SoftTaskList);
+export default connect(mapStateToProps)(MindList);

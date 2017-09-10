@@ -14,6 +14,7 @@ class TaskForm extends Component {
                         placeholder="Your task"
                         value={this.props.name}
                         onChangeText={value => this.props.taskUpdate({prop: 'name', value})}
+                        numberOfLines={2}
                     />
                 </CardSection>
 
@@ -23,6 +24,7 @@ class TaskForm extends Component {
                         placeholder="Description"
                         value={this.props.phone}
                         onChangeText={value => this.props.taskUpdate({prop: 'phone', value})}
+                        numberOfLines={2}
                     />
                 </CardSection>
 

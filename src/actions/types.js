@@ -12,3 +12,7 @@ export const SOFTTASKS_FETCH_SUCCESS = 'soft_tasks_fetch';
 export const SOFTTASK_UPDATE = 'soft_task_update';
 export const SOFTTASK_CREATE = 'soft_task_create';
 export const SOFTTASK_SAVE_SUCCESS = 'soft_task_save';
+export const MIND_UPDATE = 'mind_update';
+export const MIND_CREATE = 'mind_create';
+export const MINDS_FETCH_SUCCESS = 'mind_fetch_success';
+export const MIND_SAVE_SUCCESS = 'mind_save_success';
