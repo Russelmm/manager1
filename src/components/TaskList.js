@@ -6,6 +6,7 @@ import ListItem from './ListItem';
 import { CardSection, RoundButton} from './common';
 import {Actions} from 'react-native-router-flux';
 
+
 class TaskList extends Component{
 
     constructor(props) {
@@ -50,13 +51,13 @@ class TaskList extends Component{
         });
         return(
             <View>
-                <CardSection>
+                <CardSection style={{padding: 2}}>
                     <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                         <View >
                             <Text style={styles.titleStyle}>Hard tasks</Text>
                         </View>
-                    </TouchableWithoutFeedback>
-                    <RoundButton onPress={this.onButtonPress.bind(this)}> Add </RoundButton>
+                </TouchableWithoutFeedback>
+                    <RoundButton onPress={this.onButtonPress.bind(this)}> + </RoundButton>
                 </CardSection>
                 <View style={this.state.styles} >
                     {tasks}
@@ -78,7 +79,7 @@ const mapStateToProps = state => {
 const styles = {
     titleStyle: {
         flex:3,
-        fontSize:25,
+        fontSize:18,
         paddingLeft: 15,
         color: '#007aff',
         paddingTop: 8,

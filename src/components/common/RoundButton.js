@@ -37,8 +37,8 @@ const styles = {
         borderColor:'rgba(0,0,0,0.2)',
         alignItems:'center',
         justifyContent:'center',
-        width:55,
-        height:55,
+        width:45,
+        height:45,
         backgroundColor:'#007aff',
         borderRadius:100,
     }

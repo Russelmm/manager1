@@ -20,7 +20,7 @@ const RouterComponent =() => {
                 <Scene
                     key="dateList"
                     component={DateList}
-                    title="Date"
+                    title="Tasks1"
                     initial
                 />
                 <Scene component={MainCalendar}
